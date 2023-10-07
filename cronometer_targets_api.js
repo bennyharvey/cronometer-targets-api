@@ -20,9 +20,14 @@ async function scrapeData() {
     // page.on("console", consoleObj => console.log(consoleObj.text()));
 
     const cookies = JSON.parse(cache.getKey("cookie"));
-    for (let cookie of cookies) {
-        await page.setCookie(cookie);
-    }  
+
+    console.log(cookies)
+    if (Object.keys(cookies).length !== 0) {
+        for (let cookie of cookies) {
+            await page.setCookie(cookie);
+        }  
+    }
+    
 
     await page.goto('https://cronometer.com/');
     await page.setViewport({width: 1480, height: 1024});
