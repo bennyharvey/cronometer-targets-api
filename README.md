@@ -38,3 +38,9 @@ CM_USER=user CM_PASS=pass PORT=80 node cronometer_targets_api.js
 ```
 This will start express.js server that uses headless browser to scrape data from cronometer.
 > Important: by default sript runs browser not in sandbox mode which is potenitally dangerous. To disable this behaviour, [configure](https://pptr.dev/troubleshooting/#setting-up-chrome-linux-sandbox) your local environment and set `SANDBOXMODE=true`
+
+## API-Key Authorization (optional)
+If API_KEY variable is set, server will look for it in `X-API-KEY` header and deny access on mismatch
+```sh
+CM_USER=user CM_PASS=pass PORT=80 API_KEY=secret node cronometer_targets_api.js
+```
