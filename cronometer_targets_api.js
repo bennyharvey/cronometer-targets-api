@@ -4,6 +4,7 @@ const express = require("express")
 const puppeteer = require("puppeteer");
 const flatCache = require("flat-cache");
 const fs = require("fs");
+require('dotenv').config()
 
 const PORT = process.env.PORT || 50901;
 const USERNAME = process.env.CM_USER

@@ -10,6 +10,7 @@
   "author": "bennyharvey",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "eventsource": "^1.0.7",
     "express": "^4.16.4",
     "flat-cache": "^2.0.1",
