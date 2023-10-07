@@ -21,7 +21,6 @@ async function scrapeData() {
 
     const cookies = JSON.parse(cache.getKey("cookie"));
 
-    console.log(cookies)
     if (Object.keys(cookies).length !== 0) {
         for (let cookie of cookies) {
             await page.setCookie(cookie);
