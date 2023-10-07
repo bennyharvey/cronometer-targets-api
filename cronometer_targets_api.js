@@ -1,15 +1,12 @@
 "use strict";
 
-const express = require("express")
 const puppeteer = require("puppeteer");
 const flatCache = require("flat-cache");
 const fs = require("fs");
 require('dotenv').config()
 
-const PORT = process.env.PORT || 50901;
 const USERNAME = process.env.CM_USER
 const PASSWORD = process.env.CM_PASS
-const API_KEY = process.env.API_KEY
 const HEADLESS = process.env.HEADLESS === "false" ? false : true;
 const SANDBOXMODE = process.env.SANDBOXMODE === "true" ? true : false;
 
@@ -67,6 +64,9 @@ async function scrapeData() {
 
     await browser.close();
 
+    fs.writeFile('data.json', JSON.stringify(data), () => {})
+
+
     return {
         data: data,
         freshLogin: freshLogin,
@@ -98,21 +98,6 @@ function initCache() {
 }
 
 const cache = flatCache.load("cache");
+
 initCache();
-
-const app = express();
-
-app.use((req, res, next) => {
-    if (API_KEY && req.headers['x-api-key'] !== API_KEY) {
-        res.status(401).json({error: 'unauthorised'});
-    } else { 
-        next();
-    }
-})
-
-app.get("/data", async (req, res, next) => {
-    scrapeData()
-        .then((data) => {res.json(data); next();})
-        .catch(() => {res.status(500)})
-});
-app.listen(PORT);
+scrapeData().then((data) => {console.log('Done');})
