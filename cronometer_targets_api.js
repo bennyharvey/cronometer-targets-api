@@ -90,11 +90,14 @@ function parseMacroTarget(string) {
 }
 
 function initCache() {
-    if (fs.existsSync(cache._pathToFile)) {
-        return
+    try {
+        if (fs.existsSync(cache._pathToFile)) {
+            return
+        }
+        cache.setKey("cookie", JSON.stringify({}));
+        cache.save(true);
+    } catch(err) {
     }
-    cache.setKey("cookie", JSON.stringify({}));
-    cache.save(true);
 }
 
 const cache = flatCache.load("cache");
