@@ -5,6 +5,8 @@ services:
     build:
       context: .
     restart: unless-stopped
+    volumes:
+      - ./data.json:/usr/src/app/data.json
 
 networks:
   default:
