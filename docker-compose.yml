@@ -6,7 +6,7 @@ services:
       context: .
     restart: unless-stopped
 
-  networks:
-    default:
-      external: true
-      name: proxynet
+networks:
+  default:
+    external: true
+    name: proxynet
